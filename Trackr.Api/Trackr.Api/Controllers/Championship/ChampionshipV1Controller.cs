@@ -57,7 +57,7 @@ namespace Trackr.Api.Controllers.Championship
         }
 
         /// <summary>
-        /// Create a Championship.
+        /// Update a Championship.
         /// </summary>
         /// <remarks>
         /// Sample request:
