@@ -32,3 +32,10 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+# Custom excludes
+
+# Ignore appsettings configuration files
+**/appsettings.development.json
+**/appsettings.staging.json
+**/appsettings.production.json
