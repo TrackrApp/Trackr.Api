@@ -5,7 +5,7 @@ namespace Trackr.Api.Controllers.Championship
     /// <summary>
     /// Championship controller.
     /// </summary>
-    [Route("championship/v1")]
+    [Route("championship/v1", Name = "Championship V1")]
     public class ChampionshipV1Controller : Controller
     {
         /// <summary>
@@ -18,7 +18,7 @@ namespace Trackr.Api.Controllers.Championship
         /// 
         /// </remarks>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("")]
         public IActionResult All()
         {
             return View();
@@ -34,7 +34,7 @@ namespace Trackr.Api.Controllers.Championship
         /// 
         /// </remarks>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             return View();
@@ -50,7 +50,7 @@ namespace Trackr.Api.Controllers.Championship
         /// 
         /// </remarks>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("")]
         public IActionResult Post([FromBody] int temp)
         {
             return Created($"/championship/v1/{temp}", temp);
@@ -66,7 +66,7 @@ namespace Trackr.Api.Controllers.Championship
         /// 
         /// </remarks>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] int temp)
         {
             return Created($"/championship/v1/{temp}", temp);
@@ -82,7 +82,7 @@ namespace Trackr.Api.Controllers.Championship
         /// 
         /// </remarks>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             return Accepted();

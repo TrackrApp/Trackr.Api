@@ -13,11 +13,11 @@ namespace Trackr.Api.Extensions
     public static class ServiceExtensions
     {
         /// <summary>
-        /// Add SwashBuckle to <see cref="IServiceCollection"/>.
+        /// Add Swashbuckle to <see cref="IServiceCollection"/>.
         /// </summary>
         /// <param name="services"></param>
         /// <param name="config"></param>
-        public static void ConfigureSwashBuckle(this IServiceCollection services, IConfiguration config)
+        public static void ConfigureSwashbuckle(this IServiceCollection services, IConfiguration config)
         {
             services.AddSwaggerGen(c =>
             {
@@ -25,7 +25,7 @@ namespace Trackr.Api.Extensions
                 {
                     Version = "v1",
                     Title = "Trackr API V1",
-                    Description = "API for Trackr"
+                    Description = "Documentation for the V1 API for Trackr.",
                 });
                 
                 string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

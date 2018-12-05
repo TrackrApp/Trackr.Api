@@ -85,9 +85,9 @@
             Extension methods for <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
             </summary>
         </member>
-        <member name="M:Trackr.Api.Extensions.ServiceExtensions.ConfigureSwashBuckle(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:Trackr.Api.Extensions.ServiceExtensions.ConfigureSwashbuckle(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
-            Add SwashBuckle to <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            Add Swashbuckle to <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
             </summary>
             <param name="services"></param>
             <param name="config"></param>

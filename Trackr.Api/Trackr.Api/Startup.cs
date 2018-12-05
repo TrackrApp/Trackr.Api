@@ -38,7 +38,7 @@ namespace Trackr.Api
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureSwashBuckle(Configuration);
+            services.ConfigureSwashbuckle(Configuration);
 
             services.AddRouting(options => options.LowercaseUrls = true);        
             services.AddMvc().AddControllersAsServices();
@@ -70,11 +70,14 @@ namespace Trackr.Api
             }
 
             // Configure to use Swagger.
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "docs/{documentName}/swagger.json";
+            });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trackr V1");
-                c.RoutePrefix = string.Empty;
+                c.RoutePrefix = "docs";
+                c.SwaggerEndpoint("v1/swagger.json", "Trackr V1");                
             });
 
             // Configure to use Api Key validation middleware. TEMP disabled.
