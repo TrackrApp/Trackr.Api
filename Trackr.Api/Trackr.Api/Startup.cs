@@ -23,7 +23,7 @@ namespace Trackr.Api
         /// <param name="environment"></param>
         public Startup(IHostingEnvironment environment)
         {
-            IConfigurationBuilder builder = new ConfigurationBuilder()
+            var builder = new ConfigurationBuilder()
                 .SetBasePath(environment.ContentRootPath)
                 .AddJsonFile($"appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true, true)
@@ -37,11 +37,11 @@ namespace Trackr.Api
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
-        {            
-            services.AddRouting(options => options.LowercaseUrls = true);
-            services.AddMvc().AddControllersAsServices();
-
+        {
             services.ConfigureSwashBuckle(Configuration);
+
+            services.AddRouting(options => options.LowercaseUrls = true);        
+            services.AddMvc().AddControllersAsServices();
         }
 
         /// <summary>
@@ -62,23 +62,23 @@ namespace Trackr.Api
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();                               
             }
             else
             {
                 app.UseHsts();
             }
 
-            // Configure to use Api Key validation middleware. TEMP disabled.
-            // app.UseMiddleware<Middleware.ApiKeyValidatorMiddleware>(); 
-
             // Configure to use Swagger.
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint($"/swagger/v1/swagger.json", "Trackr V1");
-                c.RoutePrefix = "docs";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trackr V1");
+                c.RoutePrefix = string.Empty;
             });
+
+            // Configure to use Api Key validation middleware. TEMP disabled.
+            // app.UseMiddleware<Middleware.ApiKeyValidatorMiddleware>(); 
 
             app.UseHttpsRedirection();
             app.UseMvc();

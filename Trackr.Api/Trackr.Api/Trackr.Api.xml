@@ -47,7 +47,7 @@
         </member>
         <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.Put(System.Int32,System.Int32)">
             <summary>
-            Create a Championship.
+            Update a Championship.
             </summary>
             <remarks>
             Sample request:
@@ -91,6 +91,24 @@
             </summary>
             <param name="services"></param>
             <param name="config"></param>
+        </member>
+        <member name="T:Trackr.Api.Middleware.ApiKeyValidatorMiddleware">
+            <summary>
+            Custom middleware to check wether the Api Key used in requests are valid.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Middleware.ApiKeyValidatorMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:Trackr.Api.Middleware.ApiKeyValidatorMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke the request.
+            </summary>
+            <param name="context">The request.</param>
+            <returns>The result of the request.</returns>
         </member>
         <member name="T:Trackr.Api.Program">
             <summary>

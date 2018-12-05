@@ -24,11 +24,10 @@ namespace Trackr.Api.Extensions
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "Trackr API",
+                    Title = "Trackr API V1",
                     Description = "API for Trackr"
                 });
-
-                // Set the comments path for the Swagger JSON and UI.
+                
                 string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);

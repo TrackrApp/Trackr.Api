@@ -18,8 +18,8 @@ namespace Trackr.Api
             // Configureer de webapp. Gebruik Autofac.
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .ConfigureServices(services => services.AddAutofac())                
+                .ConfigureServices(services => services.AddAutofac())
+                .UseContentRoot(Directory.GetCurrentDirectory())                
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
