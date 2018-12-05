@@ -69,6 +69,9 @@ namespace Trackr.Api
                 app.UseHsts();
             }
 
+            // Configure to use Api Key validation middleware. TEMP disabled.
+            // app.UseMiddleware<Middleware.ApiKeyValidatorMiddleware>(); 
+
             // Configure to use Swagger.
             app.UseSwagger();
             app.UseSwaggerUI(c =>
