@@ -1,0 +1,9 @@
+next-version: 0.0.1
+assembly-informational-format: '{NuGetVersion}'
+mode: ContinuousDeployment
+branches: {
+  master: {
+     mode: ContinuousDelivery,
+     tag: ''
+  }
+}
