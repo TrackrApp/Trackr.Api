@@ -38,9 +38,11 @@ namespace Trackr.Api
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureSqlContext(Configuration);
             services.ConfigureSwashbuckle(Configuration);
 
-            services.AddRouting(options => options.LowercaseUrls = true);        
+            services.AddCors();
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddMvc().AddControllersAsServices();
         }
 
@@ -53,7 +55,7 @@ namespace Trackr.Api
             builder.RegisterModules();
         }
 
-        /// <summary>
+        /// <summary>B
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
         /// <param name="app"></param>
@@ -62,7 +64,7 @@ namespace Trackr.Api
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();                               
+                app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -77,14 +79,26 @@ namespace Trackr.Api
             app.UseSwaggerUI(c =>
             {
                 c.RoutePrefix = "docs";
-                c.SwaggerEndpoint("v1/swagger.json", "Trackr V1");                
+                c.SwaggerEndpoint("v1/swagger.json", "Trackr V1");
             });
 
             // Configure to use Api Key validation middleware. TEMP disabled.
             // app.UseMiddleware<Middleware.ApiKeyValidatorMiddleware>(); 
 
+            app.UseCors(builder => builder.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowCredentials());
+
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            // Check if the database exists, or create it when it doesn't.
+            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<Model.Storage.TrackrApiDbContext>();
+                context.Database.EnsureCreated();
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>1605fc8c-61f8-4167-a08e-c9d3d72f01d3</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -13,7 +14,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Race\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -22,8 +22,14 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="2.2.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Trackr.Api.Repository\Trackr.Api.Model.csproj" />
+    <ProjectReference Include="..\Trackr.Api.Shared\Trackr.Api.Shared.csproj" />
   </ItemGroup>
 
 </Project>

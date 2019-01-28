@@ -39,3 +39,4 @@ msbuild.wrn
 **/appsettings.development.json
 **/appsettings.staging.json
 **/appsettings.production.json
+*.pubxml
