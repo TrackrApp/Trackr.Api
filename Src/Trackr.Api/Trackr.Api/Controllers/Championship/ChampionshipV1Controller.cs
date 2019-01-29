@@ -111,8 +111,11 @@ namespace Trackr.Api.Controllers.Championship
                         lastRaceEvent.Sessions.Where(s => s.Results.Count > 0).First()
                     };
 
-                    // Gather the standings based on all the race results.
-                    var standings = ChampionshipMapper.RetrieveStandingsFromChampionship(allEvents);
+                    // Overwrite the result list with only the top 3 of the results.
+                    lastRaceEvent.Sessions.FirstOrDefault().Results = lastRaceEvent.Sessions.FirstOrDefault().Results.Take(3).ToList();
+
+                    // Gather the standings based on all the race results, and take the top 3.
+                    var standings = ChampionshipMapper.RetrieveStandingsFromChampionship(allEvents).Take(3).ToList();
 
                     // Return the enriched championship.
                     return Ok(new ChampionshipOverviewViewModel

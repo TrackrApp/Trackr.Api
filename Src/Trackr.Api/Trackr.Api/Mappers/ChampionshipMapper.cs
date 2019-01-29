@@ -54,7 +54,7 @@ namespace Trackr.Api.Mappers
             }
 
             // Order the standings by the highest number of points.
-            standings = standings.OrderBy(s => s.Points).ToList();
+            standings = standings.OrderByDescending(s => s.Points).ToList();
 
             // Loop through the standings and set the position accordingly.
             for (var idx = 0; idx < standings.Count; idx++)
