@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Trackr.Api.Shared.Domain
 {
@@ -8,6 +10,7 @@ namespace Trackr.Api.Shared.Domain
 
         public string Name { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public SessionType SessionType { get; set; }
 
         public List<ResultEntity> Results { get; set; } = new List<ResultEntity>();

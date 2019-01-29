@@ -4,13 +4,13 @@ namespace Trackr.Api.Shared.Domain
 {
     public enum SessionType
     {
-        [EnumMember(Value = "T")]
+        [EnumMember(Value = "Training")]
         Training,
 
-        [EnumMember(Value = "Q")]
+        [EnumMember(Value = "Qualifying")]
         Qualification,
 
-        [EnumMember(Value ="R")]
+        [EnumMember(Value ="Race")]
         Race
     }
 }
