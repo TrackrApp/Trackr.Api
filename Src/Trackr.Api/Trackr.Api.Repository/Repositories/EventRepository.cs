@@ -19,7 +19,6 @@ namespace Trackr.Api.Model.Repositories
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        /// <inheritdoc />
         public List<EventEntity> GetAllForChampionship(int championshipId)
         {
             // Retrieve all Championships.
@@ -32,7 +31,6 @@ namespace Trackr.Api.Model.Repositories
             return all.ToEntity();
         }
 
-        /// <inheritdoc />
         public EventEntity Get(int id)
         {
             // Find a match for the given id.
@@ -41,14 +39,26 @@ namespace Trackr.Api.Model.Repositories
             return match.ToEntity();
         }
 
-        /// <inheritdoc />
-        public async Task<int> AddAsync(EventEntity entity)
+        public async Task<int> AddAsync(int championshipId, EventEntity entity)
         {
             var state = entity.ToState();
 
-            await _dbContext.Events.AddAsync(state).ConfigureAwait(false);
+            // Try to retrieve the Championship to which the Event should be added.
+            var championship = await _dbContext.Championships.FirstOrDefaultAsync(c => c.Id == championshipId).ConfigureAwait(false);
+
+            // Check wether the Championship exists. If not, return an error code.
+            if (championship == null)
+            {
+                return -1;
+            }
+
+            // Add the event to the Championship.
+            championship.Events.Add(state);
+            
+            // Save the changes.
             await _dbContext.SaveChangesAsync().ConfigureAwait(false);
 
+            // Return the id of the created event.
             return state.Id;
         }
     }

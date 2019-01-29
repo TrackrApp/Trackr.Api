@@ -26,8 +26,9 @@ namespace Trackr.Api.Managers
         /// <summary>
         /// Add the given Event entity to storage.
         /// </summary>
+        /// <param name="championshipId">The id of the Championship where the Event is for.</param>
         /// <param name="entity">The entity to add.</param>
         /// <returns></returns>
-        Task AddAsync(EventEntity entity);
+        Task AddAsync(int championshipId, EventEntity entity);
     }
 }

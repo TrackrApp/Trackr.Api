@@ -32,9 +32,9 @@ namespace Trackr.Api.Managers
         }
 
         /// <inheritdoc />
-        public async Task AddAsync(EventEntity entity)
+        public async Task AddAsync(int championshipId, EventEntity entity)
         {
-            await _eventRepository.AddAsync(entity).ConfigureAwait(false);
+            await _eventRepository.AddAsync(championshipId, entity).ConfigureAwait(false);
         }
     }
 }

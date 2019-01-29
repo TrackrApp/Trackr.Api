@@ -66,6 +66,55 @@
             <param name="entity">The entity from the request body.</param>
             <returns></returns>
         </member>
+        <member name="T:Trackr.Api.Controllers.Event.EventV1Controller">
+            <summary>
+            Event controller.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.EventV1Controller.#ctor(Trackr.Api.Managers.IEventManager)">
+            <summary>
+            DI-constructor.
+            </summary>
+            <param name="eventManager"></param>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.EventV1Controller.AllForChampionship(System.Int32)">
+            <summary>
+            Get all Events for a Championship.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /event/v1/championship/1
+            
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.EventV1Controller.Get(System.Int32)">
+            <summary>
+            Get a specific Event.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /event/v1/1
+            
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.EventV1Controller.AddAsync(Trackr.Api.Shared.Domain.EventEntity,System.Int32)">
+            <summary>
+            Add a new Event.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST /event/v1/{championshipId}
+            
+            </remarks>
+            <param name="entity">The entity from the request body.</param>
+            <param name="championshipId">The id of the championship the Event is for.</param>
+            <returns></returns>
+        </member>
         <member name="T:Trackr.Api.Extensions.AutofacExtensions">
             <summary>
             Extension methods for <see cref="T:Autofac.ContainerBuilder"/>.
@@ -130,7 +179,7 @@
         <member name="M:Trackr.Api.Managers.EventManager.Get(System.Int32)">
             <inheritdoc />
         </member>
-        <member name="M:Trackr.Api.Managers.EventManager.AddAsync(Trackr.Api.Shared.Domain.EventEntity)">
+        <member name="M:Trackr.Api.Managers.EventManager.AddAsync(System.Int32,Trackr.Api.Shared.Domain.EventEntity)">
             <inheritdoc />
         </member>
         <member name="T:Trackr.Api.Managers.IChampionshipManager">
@@ -184,10 +233,11 @@
             <param name="id">The id of the requested Event.</param>
             <returns></returns>
         </member>
-        <member name="M:Trackr.Api.Managers.IEventManager.AddAsync(Trackr.Api.Shared.Domain.EventEntity)">
+        <member name="M:Trackr.Api.Managers.IEventManager.AddAsync(System.Int32,Trackr.Api.Shared.Domain.EventEntity)">
             <summary>
             Add the given Event entity to storage.
             </summary>
+            <param name="championshipId">The id of the Championship where the Event is for.</param>
             <param name="entity">The entity to add.</param>
             <returns></returns>
         </member>
