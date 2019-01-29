@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Trackr.Api.Model.Storage
 {
-    [Table("Race", Schema = "Trackr")]
-    public class RaceState
+    [Table("Event", Schema = "Trackr")]
+    public class EventState
     {
-        public RaceState()
+        public EventState()
         {
             Sessions = new List<SessionState>();
         }
@@ -16,6 +16,8 @@ namespace Trackr.Api.Model.Storage
         /// Is automatically assigned to be PK.
         /// </summary>
         public int Id { get; set; }
+
+        public int ChampionshipId { get; set; }
 
         public string Name { get; set; }
 
@@ -27,6 +29,9 @@ namespace Trackr.Api.Model.Storage
 
         public DateTimeOffset? DateTo { get; set; }
 
-        public List<SessionState> Sessions { get; set; }
+        public virtual ICollection<SessionState> Sessions { get; set; }
+
+        [ForeignKey("ChampionshipId")]
+        public virtual ChampionshipState Championship { get; set; }
     }
 }

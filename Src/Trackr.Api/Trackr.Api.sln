@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackr.Api", "Trackr.Api\Trackr.Api.csproj", "{E1553076-C133-4E2C-B302-9B8F3B0B0EB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trackr.Api.Model", "Trackr.Api.Repository\Trackr.Api.Model.csproj", "{9BC78612-DC32-43A5-9ACE-B7FDCEC90F8D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trackr.Api.Shared", "Trackr.Api.Shared\Trackr.Api.Shared.csproj", "{FF26D5E1-0EAE-4D99-A9DC-CFD4D65509FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trackr.Api.Model", "Trackr.Api.Repository\Trackr.Api.Model.csproj", "{9BC78612-DC32-43A5-9ACE-B7FDCEC90F8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

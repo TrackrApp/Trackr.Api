@@ -6,27 +6,27 @@ using Trackr.Api.Shared.Domain;
 namespace Trackr.Api.Model.Helpers
 {
     /// <summary>
-    /// Race State/Entity mapper.
+    /// Event State/Entity mapper.
     /// </summary>
-    public static class RaceMapper
+    public static class EventMapper
     {
         #region Entity to State.
 
         /// <summary>
-        /// Convert a collection of <see cref="RaceEntity"/> to a collection of <see cref="RaceState"/>.
+        /// Convert a collection of <see cref="EventEntity"/> to a collection of <see cref="EventState"/>.
         /// </summary>
-        /// <param name="entities">The collection of <see cref="RaceEntity"/>.</param>
+        /// <param name="entities">The collection of <see cref="EventEntity"/>.</param>
         /// <returns>The converted entities.</returns>
-        public static List<RaceState> ToState(this List<RaceEntity> entities)
+        public static List<EventState> ToState(this List<EventEntity> entities)
         {
             // If the input is null or empty, return an empty list.
             if (!entities?.Any() == true)
             {
-                return new List<RaceState>();
+                return new List<EventState>();
             }
 
             // The collection is valid. Create a new result and convert the contents of the collection.
-            var result = new List<RaceState>();
+            var result = new List<EventState>();
 
             for (var idx = 0; idx < entities.Count; idx++)
             {
@@ -37,13 +37,13 @@ namespace Trackr.Api.Model.Helpers
         }
 
         /// <summary>
-        /// Convert a <see cref="RaceEntity"/> to a <see cref="RaceState"/>.
+        /// Convert a <see cref="EventEntity"/> to a <see cref="EventState"/>.
         /// </summary>
-        /// <param name="entity">The <see cref="RaceEntity"/>.</param>
+        /// <param name="entity">The <see cref="EventEntity"/>.</param>
         /// <returns>The converted entity.</returns>
-        public static RaceState ToState(this RaceEntity entity)
+        public static EventState ToState(this EventEntity entity)
         {
-            return new RaceState
+            return new EventState
             {
                 Id = entity.Id,
                 Name = entity.Name,
@@ -61,37 +61,37 @@ namespace Trackr.Api.Model.Helpers
         #region Entity to State.
 
         /// <summary>
-        /// Convert a collection of <see cref="RaceState"/> to a collection of <see cref="RaceEntity"/>.
+        /// Convert a collection of <see cref="EventState"/> to a collection of <see cref="EventEntity"/>.
         /// </summary>
-        /// <param name="states">The collection of <see cref="RaceState"/>.</param>
+        /// <param name="states">The collection of <see cref="EventState"/>.</param>
         /// <returns>The converted entities.</returns>
-        public static List<RaceEntity> ToState(this List<RaceState> states)
+        public static List<EventEntity> ToEntity(this ICollection<EventState> states)
         {
             // If the input is null or empty, return an empty list.
             if (!states?.Any() == true)
             {
-                return new List<RaceEntity>();
+                return new List<EventEntity>();
             }
 
             // The collection is valid. Create a new result and convert the contents of the collection.
-            var result = new List<RaceEntity>();
+            var result = new List<EventEntity>();
 
             for (var idx = 0; idx < states.Count; idx++)
             {
-                result.Add(states[idx].ToEntity());
+                result.Add(states.ElementAt(idx).ToEntity());
             }
 
             return result;
         }
 
         /// <summary>
-        /// Convert a <see cref="RaceState"/> to a <see cref="RaceEntity"/>.
+        /// Convert a <see cref="EventState"/> to a <see cref="EventEntity"/>.
         /// </summary>
-        /// <param name="state">The <see cref="RaceState"/>.</param>
+        /// <param name="state">The <see cref="EventState"/>.</param>
         /// <returns>The converted entity.</returns>
-        public static RaceEntity ToEntity(this RaceState state)
+        public static EventEntity ToEntity(this EventState state)
         {
-            return new RaceEntity
+            return new EventEntity
             {
                 Id = state.Id,
                 Name = state.Name,

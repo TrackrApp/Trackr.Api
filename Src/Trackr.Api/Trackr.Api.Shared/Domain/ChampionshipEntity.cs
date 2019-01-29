@@ -8,6 +8,8 @@ namespace Trackr.Api.Shared.Domain
 
         public string Name { get; set; }
 
-        public virtual List<RaceEntity> Races { get; set; } = new List<RaceEntity>();
+        public string Description { get; set; }
+
+        public List<EventEntity> Events { get; set; } = new List<EventEntity>();
     }
 }

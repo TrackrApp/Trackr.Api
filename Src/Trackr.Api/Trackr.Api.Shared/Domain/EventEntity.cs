@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Trackr.Api.Shared.Domain
 {
-    public class RaceEntity
+    public class EventEntity
     {
         public int Id { get; set; }
 

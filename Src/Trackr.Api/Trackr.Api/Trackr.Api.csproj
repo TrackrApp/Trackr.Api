@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>D:\Data\VSProj\Trackr\Trackr.Api\Trackr.Api\Trackr.Api\Trackr.Api.xml</DocumentationFile>
+    <DocumentationFile>Trackr.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Data\VSProj\Trackr\Trackr.Api\Trackr.Api\Trackr.Api\Trackr.Api.xml</DocumentationFile>
+    <DocumentationFile>Trackr.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +30,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Trackr.Api.Repository\Trackr.Api.Model.csproj" />
     <ProjectReference Include="..\Trackr.Api.Shared\Trackr.Api.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Trackr.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

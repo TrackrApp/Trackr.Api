@@ -9,12 +9,12 @@ namespace Trackr.Api.Managers
     /// <inheritdoc />
     public class ChampionshipManager : IChampionshipManager
     {
-        private readonly IRepository<ChampionshipEntity> _championshipRepository;
+        private readonly ChampionshipRepository _championshipRepository;
 
         /// <summary>
         /// DI-constructor.
         /// </summary>
-        public ChampionshipManager(IRepository<ChampionshipEntity> championshipRepository)
+        public ChampionshipManager(ChampionshipRepository championshipRepository)
         {
             _championshipRepository = championshipRepository ?? throw new ArgumentNullException(nameof(championshipRepository));
         }

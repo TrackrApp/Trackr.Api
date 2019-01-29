@@ -10,55 +10,43 @@ using Trackr.Api.Shared.Domain;
 namespace Trackr.Api.Model.Repositories
 {
     /// <inheritdoc />
-    public class ChampionshipRepository
+    public class EventRepository
     {
         private TrackrApiDbContext _dbContext;
 
-        public ChampionshipRepository(TrackrApiDbContext dbContext)
+        public EventRepository(TrackrApiDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         /// <inheritdoc />
-        public List<ChampionshipEntity> GetAll()
+        public List<EventEntity> GetAllForChampionship(int championshipId)
         {
             // Retrieve all Championships.
-            var all = _dbContext.Championships.ToList();
+            var all = _dbContext.Events
+                .Include(r => r.Sessions)                
+                    .ThenInclude(s => s.Results)
+                .Where(r => r.ChampionshipId == championshipId).ToList();
 
             // Convert them to entity and return the result.
             return all.ToEntity();
         }
 
         /// <inheritdoc />
-        public ChampionshipEntity Get(int id)
+        public EventEntity Get(int id)
         {
             // Find a match for the given id.
-            var match = _dbContext.Championships.FirstOrDefault(c => c.Id == id);
+            var match = _dbContext.Events.FirstOrDefault(c => c.Id == id);
 
             return match.ToEntity();
         }
 
         /// <inheritdoc />
-        public List<ChampionshipEntity> Find(string query)
-        {
-            // If the input is empty, just return an empty list.
-            if (string.IsNullOrWhiteSpace(query))
-            {
-                return new List<ChampionshipEntity>();
-            }
-
-            var matches = _dbContext.Championships.Include(c => c.Events)
-                .Where(c => c.Name.Contains(query)).ToList();
-
-            return matches.ToEntity();
-        }
-
-        /// <inheritdoc />
-        public async Task<int> AddAsync(ChampionshipEntity entity)
+        public async Task<int> AddAsync(EventEntity entity)
         {
             var state = entity.ToState();
 
-            await _dbContext.Championships.AddAsync(state).ConfigureAwait(false);
+            await _dbContext.Events.AddAsync(state).ConfigureAwait(false);
             await _dbContext.SaveChangesAsync().ConfigureAwait(false);
 
             return state.Id;

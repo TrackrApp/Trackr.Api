@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Trackr.Api.Managers;
+using Trackr.Api.Mappers;
 using Trackr.Api.Shared.Domain;
+using Trackr.Api.ViewModels;
 
 namespace Trackr.Api.Controllers.Championship
 {
@@ -13,14 +17,19 @@ namespace Trackr.Api.Controllers.Championship
     public class ChampionshipV1Controller : Controller
     {
         private readonly IChampionshipManager _championshipManager;
+        private readonly IEventManager _eventManager;
 
         /// <summary>
         /// DI-constructor.
         /// </summary>
         /// <param name="championshipManager"></param>
-        public ChampionshipV1Controller(IChampionshipManager championshipManager)
+        /// <param name="eventManager"></param>
+        public ChampionshipV1Controller(
+            IChampionshipManager championshipManager,
+            IEventManager eventManager)
         {
             _championshipManager = championshipManager ?? throw new ArgumentNullException(nameof(championshipManager));
+            _eventManager = eventManager ?? throw new ArgumentNullException(nameof(eventManager));
         }
 
         /// <summary>
@@ -69,7 +78,7 @@ namespace Trackr.Api.Controllers.Championship
         }
 
         /// <summary>
-        /// Get a specific Championship.
+        /// Get a specific Championship overview.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -79,7 +88,7 @@ namespace Trackr.Api.Controllers.Championship
         /// </remarks>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetOverview(int id)
         {
             try
             {
@@ -93,8 +102,27 @@ namespace Trackr.Api.Controllers.Championship
                 }
                 else
                 {
-                    // A Championship was found, return it.
-                    return Ok(championship);
+                    // Get all the events for the championship.
+                    var allEvents = _eventManager.GetAllForChampionship(id);
+
+                    // Find the last session result from the latest Event. 
+                    var lastRaceEvent = allEvents.FindLast(e => e.Sessions.FindLast(s => s.Results.Count > 0) != null);
+                    lastRaceEvent.Sessions = new List<SessionEntity> {
+                        lastRaceEvent.Sessions.Where(s => s.Results.Count > 0).First()
+                    };
+
+                    // Gather the standings based on all the race results.
+                    var standings = ChampionshipMapper.RetrieveStandingsFromChampionship(allEvents);
+
+                    // Return the enriched championship.
+                    return Ok(new ChampionshipOverviewViewModel
+                    {
+                        Id = championship.Id,
+                        Name = championship.Name,
+                        Description = championship.Description,
+                        LastResult = lastRaceEvent,
+                        Standings = standings
+                    });
                 }
             }
             catch (Exception ex)

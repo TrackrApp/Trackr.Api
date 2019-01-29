@@ -9,6 +9,13 @@
             Championship controller.
             </summary>
         </member>
+        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.#ctor(Trackr.Api.Managers.IChampionshipManager,Trackr.Api.Managers.IEventManager)">
+            <summary>
+            DI-constructor.
+            </summary>
+            <param name="championshipManager"></param>
+            <param name="eventManager"></param>
+        </member>
         <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.All">
             <summary>
             Get all Championships.
@@ -21,9 +28,22 @@
             </remarks>
             <returns></returns>
         </member>
-        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.Get(System.Int32)">
+        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.Find(System.String)">
             <summary>
-            Get a specific Championship.
+            Find a Championship
+            </summary>
+            <param name="query">The query used to match Championships.</param>
+            <remarks>
+            Sample request:
+            
+                GET /championship/v1/find?query=OTKC
+            
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.GetOverview(System.Int32)">
+            <summary>
+            Get a specific Championship overview.
             </summary>
             <remarks>
             Sample request:
@@ -33,40 +53,17 @@
             </remarks>
             <returns></returns>
         </member>
-        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.Post(System.Int32)">
+        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.AddAsync(Trackr.Api.Shared.Domain.ChampionshipEntity)">
             <summary>
-            Create a Championship.
+            Add a new Championship.
             </summary>
             <remarks>
             Sample request:
             
-                POST /championship/v1
+                POST /championship/v1/{id}
             
             </remarks>
-            <returns></returns>
-        </member>
-        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.Put(System.Int32,System.Int32)">
-            <summary>
-            Update a Championship.
-            </summary>
-            <remarks>
-            Sample request:
-            
-                PUT /championship/v1/{id}
-            
-            </remarks>
-            <returns></returns>
-        </member>
-        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.Delete(System.Int32)">
-            <summary>
-            Delete a Championship.
-            </summary>
-            <remarks>
-            Sample request:
-            
-                DELETE /championship/v1/{id}
-            
-            </remarks>
+            <param name="entity">The entity from the request body.</param>
             <returns></returns>
         </member>
         <member name="T:Trackr.Api.Extensions.AutofacExtensions">
@@ -85,6 +82,13 @@
             Extension methods for <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
             </summary>
         </member>
+        <member name="M:Trackr.Api.Extensions.ServiceExtensions.ConfigureSqlContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add Sql Server to <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+        </member>
         <member name="M:Trackr.Api.Extensions.ServiceExtensions.ConfigureSwashbuckle(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Add Swashbuckle to <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
@@ -92,23 +96,124 @@
             <param name="services"></param>
             <param name="config"></param>
         </member>
-        <member name="T:Trackr.Api.Middleware.ApiKeyValidatorMiddleware">
+        <member name="T:Trackr.Api.Managers.ChampionshipManager">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.ChampionshipManager.#ctor(Trackr.Api.Model.Repositories.ChampionshipRepository)">
             <summary>
-            Custom middleware to check wether the Api Key used in requests are valid.
+            DI-constructor.
             </summary>
         </member>
-        <member name="M:Trackr.Api.Middleware.ApiKeyValidatorMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            Default constructor.
-            </summary>
-            <param name="next"></param>
+        <member name="M:Trackr.Api.Managers.ChampionshipManager.GetAll">
+            <inheritdoc />
         </member>
-        <member name="M:Trackr.Api.Middleware.ApiKeyValidatorMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:Trackr.Api.Managers.ChampionshipManager.Find(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.ChampionshipManager.Get(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.ChampionshipManager.AddAsync(Trackr.Api.Shared.Domain.ChampionshipEntity)">
+            <inheritdoc />
+        </member>
+        <member name="T:Trackr.Api.Managers.EventManager">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.EventManager.#ctor(Trackr.Api.Model.Repositories.EventRepository)">
             <summary>
-            Invoke the request.
+            DI-constructor.
             </summary>
-            <param name="context">The request.</param>
-            <returns>The result of the request.</returns>
+        </member>
+        <member name="M:Trackr.Api.Managers.EventManager.GetAllForChampionship(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.EventManager.Get(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.EventManager.AddAsync(Trackr.Api.Shared.Domain.EventEntity)">
+            <inheritdoc />
+        </member>
+        <member name="T:Trackr.Api.Managers.IChampionshipManager">
+            <summary>
+            Manager interface for anything Championship related.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Managers.IChampionshipManager.GetAll">
+            <summary>
+            Get all Championships.
+            </summary>
+            <returns>A collection of Championships.</returns>
+        </member>
+        <member name="M:Trackr.Api.Managers.IChampionshipManager.Find(System.String)">
+            <summary>
+            Find a Championship based on a given query.
+            </summary>
+            <param name="query">The query.</param>
+            <returns>A collection of matches, or empty if no match was found.</returns>
+        </member>
+        <member name="M:Trackr.Api.Managers.IChampionshipManager.Get(System.Int32)">
+            <summary>
+            Get a specific Championship.
+            </summary>
+            <param name="id">The id of the requested Championship.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Trackr.Api.Managers.IChampionshipManager.AddAsync(Trackr.Api.Shared.Domain.ChampionshipEntity)">
+            <summary>
+            Add the given Championship entity to storage.
+            </summary>
+            <param name="entity">The entity to add.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Trackr.Api.Managers.IEventManager">
+            <summary>
+            Manager interface for anything Event related.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Managers.IEventManager.GetAllForChampionship(System.Int32)">
+            <summary>
+            Get all Events for a given Championship.
+            </summary>
+            <param name="championshipId">The id of the Championship.</param>
+            <returns>A collection of Events.</returns>
+        </member>
+        <member name="M:Trackr.Api.Managers.IEventManager.Get(System.Int32)">
+            <summary>
+            Get a specific Event.
+            </summary>
+            <param name="id">The id of the requested Event.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Trackr.Api.Managers.IEventManager.AddAsync(Trackr.Api.Shared.Domain.EventEntity)">
+            <summary>
+            Add the given Event entity to storage.
+            </summary>
+            <param name="entity">The entity to add.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Trackr.Api.Mappers.ChampionshipMapper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Mappers.ChampionshipMapper.RetrieveStandingsFromChampionship(System.Collections.Generic.List{Trackr.Api.Shared.Domain.EventEntity})">
+            <summary>
+            Retrieve Championship standings from all race results.
+            </summary>
+            <param name="events">The events to retrieve race results from.</param>
+            <returns>The standings.</returns>
+        </member>
+        <member name="T:Trackr.Api.Mappers.PointsMapper">
+            <summary>
+            A mapper class for converting a position to points.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Mappers.PointsMapper.GetPointsForPosition(System.Int32)">
+            <summary>
+            Get the number of points that correlate to the position.
+            </summary>
+            <param name="position">The position.</param>
+            <returns>The points.</returns>
         </member>
         <member name="T:Trackr.Api.Program">
             <summary>
@@ -150,11 +255,41 @@
             <param name="builder"></param>
         </member>
         <member name="M:Trackr.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
-            <summary>
+            <summary>B
             This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
             </summary>
             <param name="app"></param>
             <param name="env"></param>
+        </member>
+        <member name="T:Trackr.Api.ViewModels.ChampionshipOverviewViewModel">
+            <summary>
+            The ViewModel containing data for the Championship Overview page.
+            </summary>
+        </member>
+        <member name="P:Trackr.Api.ViewModels.ChampionshipOverviewViewModel.Id">
+            <summary>
+            The id of the Championship.
+            </summary>
+        </member>
+        <member name="P:Trackr.Api.ViewModels.ChampionshipOverviewViewModel.Name">
+            <summary>
+            The name of the Championship.
+            </summary>
+        </member>
+        <member name="P:Trackr.Api.ViewModels.ChampionshipOverviewViewModel.Description">
+            <summary>
+            The description of the Championship.
+            </summary>
+        </member>
+        <member name="P:Trackr.Api.ViewModels.ChampionshipOverviewViewModel.LastResult">
+            <summary>
+            The last Event results.
+            </summary>
+        </member>
+        <member name="P:Trackr.Api.ViewModels.ChampionshipOverviewViewModel.Standings">
+            <summary>
+            The standings for the Championship.
+            </summary>
         </member>
     </members>
 </doc>

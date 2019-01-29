@@ -22,12 +22,14 @@ namespace Trackr.Api.Extensions
             builder.RegisterType<TrackrApiDbContext>();
 
             // Register the repositories.
-            builder.RegisterType<ChampionshipRepository>()
-                .As<IRepository<ChampionshipEntity>>();
+            builder.RegisterType<ChampionshipRepository>();
+            builder.RegisterType<EventRepository>();
 
             // Register the managers.
             builder.RegisterType<ChampionshipManager>()
                 .As<IChampionshipManager>();
+            builder.RegisterType<EventManager>()
+                .As<IEventManager>();
 
             // Register the controllers.
             builder.RegisterType<ChampionshipV1Controller>().PropertiesAutowired();

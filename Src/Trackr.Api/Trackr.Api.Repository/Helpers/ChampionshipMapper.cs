@@ -47,7 +47,7 @@ namespace Trackr.Api.Model.Helpers
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Races = entity.Races.ToState()
+                Events = entity.Events.ToState()
             };
         }
 
@@ -60,7 +60,7 @@ namespace Trackr.Api.Model.Helpers
         /// </summary>
         /// <param name="states">The collection of <see cref="ChampionshipState"/>.</param>
         /// <returns>The converted entities.</returns>
-        public static List<ChampionshipEntity> ToEntity(this List<ChampionshipState> states)
+        public static List<ChampionshipEntity> ToEntity(this ICollection<ChampionshipState> states)
         {
             // If the input is null or empty, return an empty list.
             if (!states?.Any() == true)
@@ -73,7 +73,7 @@ namespace Trackr.Api.Model.Helpers
 
             for (var idx = 0; idx < states.Count; idx++)
             {
-                result.Add(states[idx].ToEntity());
+                result.Add(states.ElementAt(idx).ToEntity());
             }
 
             return result;
@@ -90,7 +90,8 @@ namespace Trackr.Api.Model.Helpers
             {
                 Id = state.Id,
                 Name = state.Name,
-                Races = state.Races.ToState()
+                Description = state.Description,
+                Events = state.Events.ToEntity()
             };
         }
 

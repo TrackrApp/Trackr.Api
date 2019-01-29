@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Trackr.Api.Shared.Domain;
 
 namespace Trackr.Api.Model.Storage
 {
@@ -6,9 +8,11 @@ namespace Trackr.Api.Model.Storage
     {
         public DbSet<ChampionshipState> Championships { get; set; }
 
-        public DbSet<RaceState> Races { get; set; }
+        public DbSet<EventState> Events { get; set; }
 
         public DbSet<SessionState> Sessions { get; set; }
+
+        public DbSet<ResultState> Results { get; set; }
 
         public TrackrApiDbContext(DbContextOptions options) : base(options)
         {
@@ -17,7 +21,9 @@ namespace Trackr.Api.Model.Storage
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ConfigureChampionships(modelBuilder);
-            ConfigureRaces(modelBuilder);
+            ConfigureEvents(modelBuilder);
+            ConfigureSessions(modelBuilder);
+            ConfigureResults(modelBuilder);
         }
 
         private void ConfigureChampionships(ModelBuilder modelBuilder)
@@ -28,17 +34,17 @@ namespace Trackr.Api.Model.Storage
 
             modelBuilder
                 .Entity<ChampionshipState>()
-                .HasMany(c => c.Races);
+                .HasMany(c => c.Events);
         }
 
-        private void ConfigureRaces(ModelBuilder modelBuilder)
+        private void ConfigureEvents(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Entity<RaceState>()
+                .Entity<EventState>()
                 .HasKey(r => r.Id);
 
             modelBuilder
-                .Entity<RaceState>()
+                .Entity<EventState>()
                 .HasMany(r => r.Sessions);
         }
 
@@ -46,6 +52,22 @@ namespace Trackr.Api.Model.Storage
         {
             modelBuilder
                 .Entity<SessionState>()
+                .HasKey(s => s.Id);
+
+            modelBuilder
+                .Entity<SessionState>()
+                .HasMany(s => s.Results);
+
+            modelBuilder
+                .Entity<SessionState>()
+                .Property(s => s.SessionType)
+                    .HasConversion(new EnumToStringConverter<SessionType>());
+        }
+
+        private void ConfigureResults(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<ResultState>()
                 .HasKey(s => s.Id);
         }
     }

@@ -8,13 +8,15 @@ namespace Trackr.Api.Model.Storage
     {
         public ChampionshipState()
         {
-            Races = new List<RaceState>();
+            Events = new List<EventState>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public List<RaceState> Races { get; set; }
+        public string Description { get; set; }
+
+        public virtual ICollection<EventState> Events { get; set; }
     }
 }

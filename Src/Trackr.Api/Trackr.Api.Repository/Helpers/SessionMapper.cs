@@ -46,7 +46,9 @@ namespace Trackr.Api.Model.Helpers
             return new SessionState
             {
                 Id = entity.Id,
-                Name = entity.Name
+                Name = entity.Name,
+                SessionType = entity.SessionType,
+                Results = entity.Results.ToState()
             };
         }
 
@@ -59,7 +61,7 @@ namespace Trackr.Api.Model.Helpers
         /// </summary>
         /// <param name="states">The collection of <see cref="SessionState"/>.</param>
         /// <returns>The converted entities.</returns>
-        public static List<SessionEntity> ToEntity(this List<SessionState> states)
+        public static List<SessionEntity> ToEntity(this ICollection<SessionState> states)
         {
             // If the input is null or empty, return an empty list.
             if (!states?.Any() == true)
@@ -72,7 +74,7 @@ namespace Trackr.Api.Model.Helpers
 
             for (var idx = 0; idx < states.Count; idx++)
             {
-                result.Add(states[idx].ToEntity());
+                result.Add(states.ElementAt(idx).ToEntity());
             }
 
             return result;
@@ -88,7 +90,9 @@ namespace Trackr.Api.Model.Helpers
             return new SessionEntity
             {
                 Id = state.Id,
-                Name = state.Name
+                Name = state.Name,
+                SessionType = state.SessionType,
+                Results = state.Results.ToEntity()
             };
         }
 
