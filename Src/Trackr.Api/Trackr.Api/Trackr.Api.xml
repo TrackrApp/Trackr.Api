@@ -16,18 +16,6 @@
             <param name="championshipManager"></param>
             <param name="eventManager"></param>
         </member>
-        <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.All">
-            <summary>
-            Get all Championships.
-            </summary>
-            <remarks>
-            Sample request:
-            
-                GET /championship/v1
-            
-            </remarks>
-            <returns></returns>
-        </member>
         <member name="M:Trackr.Api.Controllers.Championship.ChampionshipV1Controller.Find(System.String)">
             <summary>
             Find a Championship
@@ -113,6 +101,55 @@
             </remarks>
             <param name="entity">The entity from the request body.</param>
             <param name="championshipId">The id of the championship the Event is for.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Trackr.Api.Controllers.Event.SessionV1Controller">
+            <summary>
+            Session controller.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.SessionV1Controller.#ctor(Trackr.Api.Managers.ISessionManager)">
+            <summary>
+            DI-constructor.
+            </summary>
+            <param name="sessionManager"></param>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.SessionV1Controller.AllForChampionship(System.Int32)">
+            <summary>
+            Get all Session for an Event.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /sessions/v1/event/1
+            
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.SessionV1Controller.Get(System.Int32)">
+            <summary>
+            Get a specific Session.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /session/v1/1
+            
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.SessionV1Controller.AddAsync(Trackr.Api.Shared.Domain.SessionEntity,System.Int32)">
+            <summary>
+            Add a new Session.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST /session/v1/{eventId}
+            
+            </remarks>
+            <param name="entity">The entity from the request body.</param>
+            <param name="eventId">The id of the Event the Session is for.</param>
             <returns></returns>
         </member>
         <member name="T:Trackr.Api.Controllers.Stats.StatsV1Controller">
@@ -264,6 +301,33 @@
             <param name="entity">The entity to add.</param>
             <returns></returns>
         </member>
+        <member name="T:Trackr.Api.Managers.ISessionManager">
+            <summary>
+            Manager interface for anything Session related.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Managers.ISessionManager.GetAllForEvent(System.Int32)">
+            <summary>
+            Get all Sessions for a given Event.
+            </summary>
+            <param name="eventId">The id of the Event.</param>
+            <returns>A collection of Sessions.</returns>
+        </member>
+        <member name="M:Trackr.Api.Managers.ISessionManager.Get(System.Int32)">
+            <summary>
+            Get a specific Session.
+            </summary>
+            <param name="id">The id of the requested Session.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Trackr.Api.Managers.ISessionManager.AddAsync(System.Int32,Trackr.Api.Shared.Domain.SessionEntity)">
+            <summary>
+            Add the given Session entity to storage.
+            </summary>
+            <param name="eventId">The id of the Event where the Session is for.</param>
+            <param name="entity">The entity to add.</param>
+            <returns></returns>
+        </member>
         <member name="T:Trackr.Api.Managers.IStatsManager">
             <summary>
             The interface gathering all stats related.
@@ -275,15 +339,33 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Trackr.Api.Managers.SessionManager">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.SessionManager.#ctor(Trackr.Api.Model.Repositories.SessionRepository)">
+            <summary>
+            DI-constructor.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Managers.SessionManager.GetAllForEvent(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.SessionManager.Get(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Trackr.Api.Managers.SessionManager.AddAsync(System.Int32,Trackr.Api.Shared.Domain.SessionEntity)">
+            <inheritdoc />
+        </member>
         <member name="T:Trackr.Api.Managers.StatsManager">
             <inheritdoc />
         </member>
-        <member name="M:Trackr.Api.Managers.StatsManager.#ctor(Trackr.Api.Model.Repositories.ChampionshipRepository,Trackr.Api.Model.Repositories.EventRepository)">
+        <member name="M:Trackr.Api.Managers.StatsManager.#ctor(Trackr.Api.Model.Repositories.ChampionshipRepository,Trackr.Api.Model.Repositories.EventRepository,Trackr.Api.Model.Repositories.SessionRepository)">
             <summary>
             DI-constructor.
             </summary>
             <param name="championshipRepository"></param>
             <param name="eventRepository"></param>
+            <param name="sessionRepository">?</param>
         </member>
         <member name="M:Trackr.Api.Managers.StatsManager.GetStats">
             <inheritdoc />

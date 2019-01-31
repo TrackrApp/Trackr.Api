@@ -25,7 +25,7 @@ namespace Trackr.Api.Model.Repositories
 
         public List<EventEntity> GetAllForChampionship(int championshipId)
         {
-            // Retrieve all Championships.
+            // Retrieve all Events for a Championship.
             var all = _dbContext.Events
                 .Include(r => r.Sessions)                
                     .ThenInclude(s => s.Results)

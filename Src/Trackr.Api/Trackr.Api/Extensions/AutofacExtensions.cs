@@ -5,7 +5,6 @@ using Trackr.Api.Controllers.Stats;
 using Trackr.Api.Managers;
 using Trackr.Api.Model.Repositories;
 using Trackr.Api.Model.Storage;
-using Trackr.Api.Shared.Domain;
 
 namespace Trackr.Api.Extensions
 {
@@ -26,18 +25,23 @@ namespace Trackr.Api.Extensions
             // Register the repositories.
             builder.RegisterType<ChampionshipRepository>();
             builder.RegisterType<EventRepository>();
+            builder.RegisterType<SessionRepository>();
 
             // Register the managers.
             builder.RegisterType<ChampionshipManager>()
                 .As<IChampionshipManager>();
             builder.RegisterType<EventManager>()
                 .As<IEventManager>();
+            builder.RegisterType<SessionManager>()
+                .As<ISessionManager>();
             builder.RegisterType<StatsManager>()
                 .As<IStatsManager>();
 
             // Register the controllers.
             builder.RegisterType<ChampionshipV1Controller>().PropertiesAutowired();
             builder.RegisterType<EventV1Controller>().PropertiesAutowired();
+            builder.RegisterType<SessionV1Controller>().PropertiesAutowired();
+
             builder.RegisterType<StatsV1Controller>().PropertiesAutowired();
         }
     }

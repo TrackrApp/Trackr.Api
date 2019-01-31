@@ -33,22 +33,6 @@ namespace Trackr.Api.Controllers.Championship
         }
 
         /// <summary>
-        /// Get all Championships.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        /// 
-        ///     GET /championship/v1
-        /// 
-        /// </remarks>
-        /// <returns></returns>
-        [HttpGet("")]
-        public IActionResult All()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// Find a Championship
         /// </summary>
         /// <param name="query">The query used to match Championships.</param>

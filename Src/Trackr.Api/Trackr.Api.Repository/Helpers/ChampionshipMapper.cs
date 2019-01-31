@@ -47,6 +47,7 @@ namespace Trackr.Api.Model.Helpers
             {
                 Id = entity.Id,
                 Name = entity.Name,
+                Description = entity.Description,
                 Events = entity.Events.ToState()
             };
         }
