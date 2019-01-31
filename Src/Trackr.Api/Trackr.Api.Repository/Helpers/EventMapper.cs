@@ -48,7 +48,10 @@ namespace Trackr.Api.Model.Helpers
                 Id = entity.Id,
                 Name = entity.Name,
                 Location = entity.Location,
+                Address = entity.Address,
                 Url = entity.Url,
+                HeaderImage = entity.HeaderImage,
+                HeaderPosition = entity.HeaderPosition,
                 DateFrom = entity.DateFrom,
                 DateTo = entity.DateTo,
                 Sessions = entity.Sessions.ToState()
@@ -56,7 +59,6 @@ namespace Trackr.Api.Model.Helpers
         }
 
         #endregion Entity to State.
-
 
         #region Entity to State.
 
@@ -96,7 +98,10 @@ namespace Trackr.Api.Model.Helpers
                 Id = state.Id,
                 Name = state.Name,
                 Location = state.Location,
+                Address = state.Address,                
                 Url = state.Url,
+                HeaderImage = state.HeaderImage,
+                HeaderPosition = state.HeaderPosition,
                 DateFrom = state.DateFrom,
                 DateTo = state.DateTo,
                 Sessions = state.Sessions.ToEntity()

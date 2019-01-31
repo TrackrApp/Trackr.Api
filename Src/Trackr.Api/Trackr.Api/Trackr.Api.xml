@@ -341,5 +341,15 @@
             The standings for the Championship.
             </summary>
         </member>
+        <member name="T:Trackr.Api.ViewModels.EventViewModel">
+            <summary>
+            Event View Model, overridin the Event entity.
+            </summary>
+        </member>
+        <member name="P:Trackr.Api.ViewModels.EventViewModel.HeaderImage">
+            <summary>
+            Override the byte[] image with a base64 string.
+            </summary>
+        </member>
     </members>
 </doc>

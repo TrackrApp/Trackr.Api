@@ -23,7 +23,13 @@ namespace Trackr.Api.Model.Storage
 
         public string Location { get; set; }
 
+        public string Address { get; set; }
+
         public string Url { get; set; }
+
+        public byte[] HeaderImage { get; set; }
+
+        public double? HeaderPosition { get; set; }
 
         public DateTimeOffset DateFrom { get; set; }
 

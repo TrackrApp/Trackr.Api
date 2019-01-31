@@ -34,7 +34,16 @@ namespace Trackr.Api.Model.Repositories
         public EventEntity Get(int id)
         {
             // Find a match for the given id.
-            var match = _dbContext.Events.FirstOrDefault(c => c.Id == id);
+            var match = _dbContext.Events
+                .Include(r => r.Sessions)
+                    .ThenInclude(s => s.Results)
+                .FirstOrDefault(c => c.Id == id);
+
+            // If no match was found, return null.
+            if (match == null)
+            {
+                return null;
+            }
 
             return match.ToEntity();
         }
