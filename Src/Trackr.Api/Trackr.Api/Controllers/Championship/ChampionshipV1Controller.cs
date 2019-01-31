@@ -107,12 +107,18 @@ namespace Trackr.Api.Controllers.Championship
 
                     // Find the last session result from the latest Event. 
                     var lastRaceEvent = allEvents.FindLast(e => e.Sessions.FindLast(s => s.Results.Count > 0) != null);
-                    lastRaceEvent.Sessions = new List<SessionEntity> {
-                        lastRaceEvent.Sessions.Where(s => s.Results.Count > 0).First()
-                    };
+                    
+                    // Check wether there has been a session.
+                    if (lastRaceEvent != null)
+                    {
+                        // Limit the available sessions to the latest one (which has results).
+                        lastRaceEvent.Sessions = new List<SessionEntity> {
+                            lastRaceEvent.Sessions.Where(s => s.Results.Count > 0).First()
+                        };
 
-                    // Overwrite the result list with only the top 3 of the results.
-                    lastRaceEvent.Sessions.FirstOrDefault().Results = lastRaceEvent.Sessions.FirstOrDefault().Results.Take(3).ToList();
+                        // Overwrite the result list with only the top 3 of the results.
+                        lastRaceEvent.Sessions.FirstOrDefault().Results = lastRaceEvent.Sessions.FirstOrDefault().Results.Take(3).ToList();
+                    }
 
                     // Gather the standings based on all the race results, and take the top 3.
                     var standings = ChampionshipMapper.RetrieveStandingsFromChampionship(allEvents).Take(3).ToList();
