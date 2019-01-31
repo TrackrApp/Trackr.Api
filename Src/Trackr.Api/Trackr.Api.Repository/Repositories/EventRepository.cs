@@ -9,7 +9,6 @@ using Trackr.Api.Shared.Domain;
 
 namespace Trackr.Api.Model.Repositories
 {
-    /// <inheritdoc />
     public class EventRepository
     {
         private TrackrApiDbContext _dbContext;
@@ -17,6 +16,11 @@ namespace Trackr.Api.Model.Repositories
         public EventRepository(TrackrApiDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        }
+
+        public int Count()
+        {
+            return _dbContext.Events.Count();
         }
 
         public List<EventEntity> GetAllForChampionship(int championshipId)

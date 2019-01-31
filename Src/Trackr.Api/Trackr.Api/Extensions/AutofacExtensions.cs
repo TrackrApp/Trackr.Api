@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Trackr.Api.Controllers.Championship;
 using Trackr.Api.Controllers.Event;
+using Trackr.Api.Controllers.Stats;
 using Trackr.Api.Managers;
 using Trackr.Api.Model.Repositories;
 using Trackr.Api.Model.Storage;
@@ -31,10 +32,13 @@ namespace Trackr.Api.Extensions
                 .As<IChampionshipManager>();
             builder.RegisterType<EventManager>()
                 .As<IEventManager>();
+            builder.RegisterType<StatsManager>()
+                .As<IStatsManager>();
 
             // Register the controllers.
             builder.RegisterType<ChampionshipV1Controller>().PropertiesAutowired();
             builder.RegisterType<EventV1Controller>().PropertiesAutowired();
+            builder.RegisterType<StatsV1Controller>().PropertiesAutowired();
         }
     }
 }

@@ -52,6 +52,7 @@ namespace Trackr.Api.Model.Helpers
                 Url = entity.Url,
                 HeaderImage = entity.HeaderImage,
                 HeaderPosition = entity.HeaderPosition,
+                EventLogo = entity.EventLogo,
                 DateFrom = entity.DateFrom,
                 DateTo = entity.DateTo,
                 Sessions = entity.Sessions.ToState()
@@ -102,6 +103,7 @@ namespace Trackr.Api.Model.Helpers
                 Url = state.Url,
                 HeaderImage = state.HeaderImage,
                 HeaderPosition = state.HeaderPosition,
+                EventLogo = state.EventLogo,
                 DateFrom = state.DateFrom,
                 DateTo = state.DateTo,
                 Sessions = state.Sessions.ToEntity()

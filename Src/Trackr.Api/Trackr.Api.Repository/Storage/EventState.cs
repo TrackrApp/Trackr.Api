@@ -31,6 +31,8 @@ namespace Trackr.Api.Model.Storage
 
         public double? HeaderPosition { get; set; }
 
+        public byte[] EventLogo { get; set; }
+
         public DateTimeOffset DateFrom { get; set; }
 
         public DateTimeOffset? DateTo { get; set; }
