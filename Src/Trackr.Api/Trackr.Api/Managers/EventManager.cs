@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Trackr.Api.Model.Repositories;
 using Trackr.Api.Shared.Domain;
@@ -22,7 +23,10 @@ namespace Trackr.Api.Managers
         /// <inheritdoc />
         public List<EventEntity> GetAllForChampionship(int championshipId)
         {
-            return _eventRepository.GetAllForChampionship(championshipId);
+            var events = _eventRepository.GetAllForChampionship(championshipId);
+
+            // Sort by most recent event first.
+            return events.OrderByDescending(e => e.DateFrom).ToList();
         }
 
         /// <inheritdoc />
