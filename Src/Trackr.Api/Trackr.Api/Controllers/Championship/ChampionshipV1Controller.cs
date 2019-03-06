@@ -92,19 +92,22 @@ namespace Trackr.Api.Controllers.Championship
                     // Gather the standings based on all the race results, and take the top 3.
                     var standings = ChampionshipMapper.RetrieveStandingsFromChampionship(allEvents).Take(3).ToList();
 
+                    // Sort the events by oldest first.
+                    var eventsByDateAscending = allEvents.OrderBy(e => e.DateFrom).ToList();
+
                     // Find the last session result from the latest Event. 
-                    var lastRaceEvent = allEvents.FindLast(e => e.Sessions.FindLast(s => s.Results.Count > 0) != null);
+                    var lastEvent = eventsByDateAscending.FindLast(e => e.Sessions.FindLast(s => s.Results.Count > 0) != null);
                     
                     // Check wether there has been a session.
-                    if (lastRaceEvent != null)
+                    if (lastEvent != null)
                     {
                         // Limit the available sessions to the latest one (which has results).
-                        lastRaceEvent.Sessions = new List<SessionEntity> {
-                            lastRaceEvent.Sessions.Where(s => s.Results.Count > 0).Last()
+                        lastEvent.Sessions = new List<SessionEntity> {
+                            lastEvent.Sessions.Where(s => s.Results.Count > 0).Last()
                         };
 
                         // Overwrite the result list with only the top 3 of the results.
-                        lastRaceEvent.Sessions.FirstOrDefault().Results = lastRaceEvent.Sessions.FirstOrDefault().Results.Take(3).ToList();
+                        lastEvent.Sessions.FirstOrDefault().Results = lastEvent.Sessions.FirstOrDefault().Results.Take(3).ToList();
                     }
 
                     // Return the enriched championship.
@@ -113,7 +116,7 @@ namespace Trackr.Api.Controllers.Championship
                         Id = championship.Id,
                         Name = championship.Name,
                         Description = championship.Description,
-                        LastResult = lastRaceEvent,
+                        LastResult = lastEvent,
                         Standings = standings
                     });
                 }
