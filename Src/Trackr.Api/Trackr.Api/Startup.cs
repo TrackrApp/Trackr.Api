@@ -41,7 +41,14 @@ namespace Trackr.Api
             services.ConfigureSqlContext(Configuration);
             services.ConfigureSwashbuckle(Configuration);
 
-            services.AddCors();
+            // Allow any request.
+            services.AddCors(o => o.AddPolicy("Trackr", builder =>
+            {
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddMvc().AddControllersAsServices();
         }
