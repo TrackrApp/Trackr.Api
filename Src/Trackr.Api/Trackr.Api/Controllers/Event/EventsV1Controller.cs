@@ -80,14 +80,6 @@ namespace Trackr.Api.Controllers.Event
                 }
                 else
                 {
-                    // Cast the event entity to the View Model, and return the Header image as base64 string.
-                    var eventVm = evt as EventViewModel;
-
-                    if (evt.HeaderImage != null)
-                    {
-                        eventVm.HeaderImage = Convert.ToBase64String(evt.HeaderImage);
-                    }
-
                     return Ok(evt);
                 }
             }

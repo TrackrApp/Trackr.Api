@@ -11,7 +11,7 @@ namespace Trackr.Api.Controllers.Event
     /// Session controller.
     /// </summary>
     [Route("session/v1", Name = "Session V1")]
-    public class SessionV1Controller : Controller
+    public class SessionsV1Controller : Controller
     {
         private readonly ISessionManager _sessionManager;
 
@@ -19,7 +19,7 @@ namespace Trackr.Api.Controllers.Event
         /// DI-constructor.
         /// </summary>
         /// <param name="sessionManager"></param>
-        public SessionV1Controller(ISessionManager sessionManager)
+        public SessionsV1Controller(ISessionManager sessionManager)
         {
             _sessionManager = sessionManager ?? throw new ArgumentNullException(nameof(sessionManager));
         }
@@ -35,11 +35,11 @@ namespace Trackr.Api.Controllers.Event
         /// </remarks>
         /// <returns></returns>
         [HttpGet("event/{eventId}")]
-        public IActionResult AllForChampionship(int sessionId)
+        public IActionResult AllForChampionship(int eventId)
         {
             try
             {
-                var sessions = _sessionManager.GetAllForEvent(sessionId);
+                var sessions = _sessionManager.GetAllForEvent(eventId);
 
                 if (sessions?.Any() == false)
                 {

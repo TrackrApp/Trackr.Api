@@ -40,7 +40,8 @@ namespace Trackr.Api.Extensions
             // Register the controllers.
             builder.RegisterType<ChampionshipV1Controller>().PropertiesAutowired();
             builder.RegisterType<EventV1Controller>().PropertiesAutowired();
-            builder.RegisterType<SessionV1Controller>().PropertiesAutowired();
+            builder.RegisterType<SessionsV1Controller>().PropertiesAutowired();
+            builder.RegisterType<StandingsV1Controller>().PropertiesAutowired();
 
             builder.RegisterType<StatsV1Controller>().PropertiesAutowired();
         }

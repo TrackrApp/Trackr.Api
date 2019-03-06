@@ -103,18 +103,18 @@
             <param name="championshipId">The id of the championship the Event is for.</param>
             <returns></returns>
         </member>
-        <member name="T:Trackr.Api.Controllers.Event.SessionV1Controller">
+        <member name="T:Trackr.Api.Controllers.Event.SessionsV1Controller">
             <summary>
             Session controller.
             </summary>
         </member>
-        <member name="M:Trackr.Api.Controllers.Event.SessionV1Controller.#ctor(Trackr.Api.Managers.ISessionManager)">
+        <member name="M:Trackr.Api.Controllers.Event.SessionsV1Controller.#ctor(Trackr.Api.Managers.ISessionManager)">
             <summary>
             DI-constructor.
             </summary>
             <param name="sessionManager"></param>
         </member>
-        <member name="M:Trackr.Api.Controllers.Event.SessionV1Controller.AllForChampionship(System.Int32)">
+        <member name="M:Trackr.Api.Controllers.Event.SessionsV1Controller.AllForChampionship(System.Int32)">
             <summary>
             Get all Session for an Event.
             </summary>
@@ -126,7 +126,7 @@
             </remarks>
             <returns></returns>
         </member>
-        <member name="M:Trackr.Api.Controllers.Event.SessionV1Controller.Get(System.Int32)">
+        <member name="M:Trackr.Api.Controllers.Event.SessionsV1Controller.Get(System.Int32)">
             <summary>
             Get a specific Session.
             </summary>
@@ -138,7 +138,7 @@
             </remarks>
             <returns></returns>
         </member>
-        <member name="M:Trackr.Api.Controllers.Event.SessionV1Controller.AddAsync(Trackr.Api.Shared.Domain.SessionEntity,System.Int32)">
+        <member name="M:Trackr.Api.Controllers.Event.SessionsV1Controller.AddAsync(Trackr.Api.Shared.Domain.SessionEntity,System.Int32)">
             <summary>
             Add a new Session.
             </summary>
@@ -150,6 +150,29 @@
             </remarks>
             <param name="entity">The entity from the request body.</param>
             <param name="eventId">The id of the Event the Session is for.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Trackr.Api.Controllers.Event.StandingsV1Controller">
+            <summary>
+            Standings controller.
+            </summary>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.StandingsV1Controller.#ctor(Trackr.Api.Managers.IEventManager)">
+            <summary>
+            DI-constructor.
+            </summary>
+            <param name="eventManager"></param>
+        </member>
+        <member name="M:Trackr.Api.Controllers.Event.StandingsV1Controller.AllForChampionship(System.Int32)">
+            <summary>
+            Get the standings for a Championshp.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /standings/v1/championship/1
+            
+            </remarks>
             <returns></returns>
         </member>
         <member name="T:Trackr.Api.Controllers.Stats.StatsV1Controller">
@@ -472,12 +495,7 @@
         </member>
         <member name="T:Trackr.Api.ViewModels.EventViewModel">
             <summary>
-            Event View Model, overridin the Event entity.
-            </summary>
-        </member>
-        <member name="P:Trackr.Api.ViewModels.EventViewModel.HeaderImage">
-            <summary>
-            Override the byte[] image with a base64 string.
+            Event View Model, overriding the Event entity.
             </summary>
         </member>
         <member name="T:Trackr.Api.ViewModels.StatsViewModel">

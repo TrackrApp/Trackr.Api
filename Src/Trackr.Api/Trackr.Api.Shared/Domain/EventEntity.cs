@@ -15,11 +15,11 @@ namespace Trackr.Api.Shared.Domain
 
         public string Url { get; set; }
 
-        public byte[] HeaderImage { get; set; }
+        public string HeaderImageUrl { get; set; }
 
         public double? HeaderPosition { get; set; }
 
-        public byte[] EventLogo { get; set; }
+        public string EventLogoUrl { get; set; }
 
         public DateTimeOffset DateFrom { get; set; }
 
