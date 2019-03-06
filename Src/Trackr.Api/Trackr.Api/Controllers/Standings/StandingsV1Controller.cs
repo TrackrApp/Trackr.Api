@@ -42,7 +42,7 @@ namespace Trackr.Api.Controllers.Event
                 var allEvents = _eventManager.GetAllForChampionship(championshipId);
 
                 // Gather the standings based on all the race results.
-                var standings = ChampionshipMapper.RetrieveStandingsFromChampionship(allEvents).Take(3).ToList();
+                var standings = ChampionshipMapper.RetrieveStandingsFromChampionship(allEvents).ToList();
 
                 if (standings?.Any() == false)
                 {
