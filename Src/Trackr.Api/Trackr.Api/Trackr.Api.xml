@@ -483,6 +483,11 @@
             The description of the Championship.
             </summary>
         </member>
+        <member name="P:Trackr.Api.ViewModels.ChampionshipOverviewViewModel.ChampionshipImageUrl">
+            <summary>
+            The URL of the image associated with the Championship.
+            </summary>
+        </member>
         <member name="P:Trackr.Api.ViewModels.ChampionshipOverviewViewModel.LastResult">
             <summary>
             The last Event results.

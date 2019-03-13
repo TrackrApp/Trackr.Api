@@ -116,6 +116,7 @@ namespace Trackr.Api.Controllers.Championship
                         Id = championship.Id,
                         Name = championship.Name,
                         Description = championship.Description,
+                        ChampionshipImageUrl = championship.ChampionshipImageUrl,
                         LastResult = lastEvent,
                         Standings = standings
                     });

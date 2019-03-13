@@ -48,6 +48,7 @@ namespace Trackr.Api.Model.Helpers
                 Id = entity.Id,
                 Name = entity.Name,
                 Description = entity.Description,
+                ChampionshipImageUrl = entity.ChampionshipImageUrl,
                 Events = entity.Events.ToState()
             };
         }
@@ -92,6 +93,7 @@ namespace Trackr.Api.Model.Helpers
                 Id = state.Id,
                 Name = state.Name,
                 Description = state.Description,
+                ChampionshipImageUrl = state.ChampionshipImageUrl,
                 Events = state.Events.ToEntity()
             };
         }

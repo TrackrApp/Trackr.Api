@@ -24,6 +24,11 @@ namespace Trackr.Api.ViewModels
         public string Description { get; set; }
 
         /// <summary>
+        /// The URL of the image associated with the Championship.
+        /// </summary>
+        public string ChampionshipImageUrl { get; set; }
+
+        /// <summary>
         /// The last Event results.
         /// </summary>
         public EventEntity LastResult { get; set; }

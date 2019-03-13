@@ -17,6 +17,8 @@ namespace Trackr.Api.Model.Storage
 
         public string Description { get; set; }
 
+        public string ChampionshipImageUrl { get; set; }
+
         public virtual ICollection<EventState> Events { get; set; }
     }
 }
