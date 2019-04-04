@@ -42,19 +42,21 @@ namespace Trackr.Api.Mappers
                         standings.Add(new StandingEntity
                         {
                             Name = result.Driver,
-                            Points = points
+                            Points = points,
+                            NumberOfRaces = 1
                         });
                     }
                     else
                     {
                         // Add the points.
                         standings[driverIndex].Points = standings[driverIndex].Points + points;
+                        standings[driverIndex].NumberOfRaces = standings[driverIndex].NumberOfRaces + 1;
                     }
                 }
             }
 
             // Order the standings by the highest number of points.
-            standings = standings.OrderByDescending(s => s.Points).ToList();
+            standings = standings.OrderByDescending(s => s.Points).ThenBy(s => s.NumberOfRaces).ToList();
 
             // Loop through the standings and set the position accordingly.
             for (var idx = 0; idx < standings.Count; idx++)
